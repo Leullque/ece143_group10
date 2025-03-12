@@ -9,3 +9,11 @@ Final project
 3. visualization.ipynb: visualization part and exploratory data analysis
 4. prediction.ipynb: prediction work
 
+### Third-party modules
+- pandas
+- matplotlib
+- numpy
+- seaborn
+- regex
+- spicy
+- sklearn
