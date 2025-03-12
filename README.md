@@ -9,6 +9,14 @@ Final project
 3. visualization.ipynb: visualization part and exploratory data analysis
 4. prediction.ipynb: prediction work
 
+### How to Run
+To clean data:
+run python3 clean_.py
+
+To visualize and train the model:
+1. make sure all modules are installed
+2. run visualization.ipynb
+
 ### Third-party modules
 - pandas
 - matplotlib
