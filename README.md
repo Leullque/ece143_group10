@@ -10,12 +10,12 @@
 4. EOQ.py: perform EOQ analysis
 5. visualization.ipynb: visualization part and exploratory data analysis
 
+### How to clean data:
+run python3 clean_.py -> new .csv files generated in /archive -> generate zip files from this
+import _read.py -> call _read function to return assimilated dataframes -> generate zip files from this
+Cleaned data is stored back in ./archive folder
+
 ### How to Run
-To clean data:
-
-run python3 clean_.py -> new .csv files generated in /archive -> load new .csv files into dataframes
-import _read.py -> call _read function to return assimilated dataframes
-
 To visualize and train the model:
 1. make sure all modules are installed
 2. run visualization.ipynb
