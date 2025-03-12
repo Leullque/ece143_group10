@@ -1,5 +1,5 @@
 # ece143_group10
-Final project
+### Final project
 - This is the final project of inventory analysis for group 10
 - We present the datasets, data cleaning methods, visualization, prediction work here.
 
