@@ -11,7 +11,7 @@
 5. visualization.ipynb: visualization part and exploratory data analysis
 
 ### How to Run
-To clean data:
+To clean data: //
 run python3 clean_.py -> new .csv files generated in /archive -> load new .csv files into dataframes
 import _read.py -> call _read function to return assimilated dataframes
 
