@@ -8,7 +8,7 @@
 2. /modules/cleaning: methods used in cleaning
 3. /modules/visualization: methods used in visualization
 4. EOQ.py: perform EOQ analysis
-5. prediction.py: source file for model training and evaluation
+5. prediction.py: perform model training and evaluation
 6. visualization.ipynb: visualization part and exploratory data analysis
 
 ### How to clean data:
