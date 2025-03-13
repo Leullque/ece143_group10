@@ -12,13 +12,13 @@
 6. visualization.ipynb: visualization part and exploratory data analysis
 
 ### How to clean data:
-1. run python3 clean_*.py
+1. run python3 clean_*.py  
    Generating new .csv files in /archive
-2. import *read from *_read.py
+2. import *read from *_read.py  
    Returning cleaned pandas.DataFrame
 
 ### How to Run
-Note: make sure all modules are installed and all cleaned dataset are stored in /archive as .zip files
+Note: make sure all modules are installed and all cleaned datasets are stored in /archive as .zip files
 1. To perform EOQ analysis:  
 python3 EOQ.py  
 2. To train and evaluate ML models:  
