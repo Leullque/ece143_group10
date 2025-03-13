@@ -22,7 +22,7 @@ Note: make sure all modules are installed
 python3 EOQ.py  
 2. To train and evaluate ML models:  
 python3 prediction.py  
-3. To visualize and train the model:  
+3. To visualize the data and train the model:  
 run visualization.ipynb  
 
 ### Third-party modules
