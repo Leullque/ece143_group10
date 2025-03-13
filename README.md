@@ -17,19 +17,13 @@ import _read.py -> call _read function to return assimilated dataframes -> gener
 Cleaned data is stored back in ./archive folder
 
 ### How to Run
-Note: make sure all modules are installed
-
-To perform EOQ analysis:
-
-  python3 EOQ.py
-  
-To train and evaluate ML models:
-
-  python3 prediction.py
-  
-To visualize and train the model:
-
-  run visualization.ipynb
+Note: make sure all modules are installed  
+To perform EOQ analysis:  
+  python3 EOQ.py  
+To train and evaluate ML models:  
+  python3 prediction.py  
+To visualize and train the model:  
+  run visualization.ipynb  
 
 ### Third-party modules
 - pandas
