@@ -18,11 +18,17 @@ Cleaned data is stored back in ./archive folder
 
 ### How to Run
 Note: make sure all modules are installed
+
 To perform EOQ analysis:
+
   python3 EOQ.py
+  
 To train and evaluate ML models:
+
   python3 prediction.py
+  
 To visualize and train the model:
+
   run visualization.ipynb
 
 ### Third-party modules
