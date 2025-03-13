@@ -5,12 +5,11 @@
 
 ### File structure
 1. /archive: zipped datasets
-2. EOQ.py: perform EOQ analysis
-3. visualization.ipynb: visualization part and exploratory data analysis
-4. /modules/cleaning: methods used in cleaning
-   1. clean_.py: data cleanning methods
-   2. _read.py: data assimilation methods
-5. /modules/visualization: methods used in visualization
+2. /modules/cleaning: methods used in cleaning
+3. /modules/visualization: methods used in visualization
+4. EOQ.py: perform EOQ analysis
+5. prediction.py: source file for model training and evaluation
+6. visualization.ipynb: visualization part and exploratory data analysis
 
 ### How to clean data:
 run python3 clean_.py -> new .csv files generated in /archive -> generate zip files from this
@@ -30,3 +29,4 @@ To visualize and train the model:
 - regex
 - spicy
 - sklearn
+- zipfile
