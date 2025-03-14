@@ -7,7 +7,8 @@ import regex as re
 import datetime
 from scipy import stats
 import regex as re
-
+import zipfile
+        
 def pre_process_size(string):
     """
     Pre-processes a size string by extracting numerical values and their corresponding units,
@@ -51,36 +52,32 @@ def pre_process_size(string):
             answer *= key
     
     return answer
-#Function to calculate EOQ
-
-def calculate_EOQ(df_row):
-    brand = int(df_row['Brand'])
-    try :
-        S = df['CPO']
-    except:
-        S=30
-        D = 1.1 * df_row['TotalSaleQuantity']  # Should be changed to demand data.
-        H = 0.25 * purchases_2017_df.loc[purchases_2017_df['Brand']==brand]['PurchasePrice'].values[0]
-
-    return int(np.ceil(np.sqrt(2*D*S/H)))
     
 def EOQ():
-    # Define the file paths as a variable
-    sales = read_zip('archive\SalesFINAL12312016.csv')
-    invoices = read_zip('archive\InvoicePurchases12312016.csv')
-    beginning = read_zip('archive\BegInvFINAL12312016.csv')
-    ending = read_zip('archive\EndInvFINAL12312016.csv')
-    purchases_2016 = read_zip('archive\PurchasesFINAL12312016.csv')
-    purchases_2017 = read_zip('archive\2017PurchasePricesDec.csv')
+
+    # Define the file paths for the ZIP archives
+    sales_zip = r'archive\SalesFINAL12312016.csv.zip'
+    invoices_zip = r'archive\InvoicePurchases12312016.csv.zip'
+    beginning_zip = r'archive\BegInvFINAL12312016.csv.zip'
+    ending_zip = r'archive\EndInvFINAL12312016.csv.zip'
+    purchases_2016_zip = r'archive\PurchasesFINAL12312016.csv.zip'
+    purchases_2017_zip = r'archive\2017PurchasePricesDec.csv.zip'
     
-    #Load all dataframes
+    # Function to read a CSV file from a ZIP archive
+    def read_csv_from_zip(zip_path, parse_dates=None):
+        with zipfile.ZipFile(zip_path, 'r') as z:
+            # Assuming there's only one CSV file per ZIP, get its name
+            csv_filename = z.namelist()[0]  
+            with z.open(csv_filename) as file:
+                return pd.read_csv(file, parse_dates=parse_dates)
     
-    sales_df = pd.read_csv(sales,parse_dates=['SalesDate'])
-    invoices_df = pd.read_csv(invoices,parse_dates=['InvoiceDate','PODate','PayDate'])
-    beginning_df = pd.read_csv(beginning,parse_dates=['startDate'])
-    ending_df = pd.read_csv(ending,parse_dates=['endDate'])
-    purchases_2016_df = pd.read_csv(purchases_2016,parse_dates=['PODate','ReceivingDate','InvoiceDate','PayDate'])
-    purchases_2017_df = pd.read_csv(purchases_2017)
+    # Load all dataframes
+    sales_df = read_csv_from_zip(sales_zip, parse_dates=['SalesDate'])
+    invoices_df = read_csv_from_zip(invoices_zip, parse_dates=['InvoiceDate', 'PODate', 'PayDate'])
+    beginning_df = read_csv_from_zip(beginning_zip, parse_dates=['startDate'])
+    ending_df = read_csv_from_zip(ending_zip, parse_dates=['endDate'])
+    purchases_2016_df = read_csv_from_zip(purchases_2016_zip, parse_dates=['PODate', 'ReceivingDate', 'InvoiceDate', 'PayDate'])
+    purchases_2017_df = read_csv_from_zip(purchases_2017_zip)
 
     # Mapping the brand with the city of store
     brand_city_mapping = ending_df.groupby('Brand')['City'].apply(lambda x: list(x)[0]).to_dict()
@@ -227,6 +224,17 @@ def EOQ():
     
     eoq_df = avg_sale_price.merge(S,on='Brand',how='inner')
     eoq_df.fillna(eoq_df.mean(),inplace=True)
+
+    def calculate_EOQ(df_row):
+        brand = int(df_row['Brand'])
+        #try :
+            #S = df['CPO']
+        #except:
+        S=30
+        D = 1.1 * df_row['TotalSaleQuantity']  # Should be changed to demand data.
+        H = 0.25 * purchases_2017_df.loc[purchases_2017_df['Brand']==brand]['PurchasePrice'].values[0]
+    
+        return int(np.ceil(np.sqrt(2*D*S/H)))
     
     safety_df = sales_df.groupby('Brand').agg(MinSalesQty=('SalesQuantity','min'),MaxSalesQty=('SalesQuantity','max'),TotalSalesQty=('SalesQuantity','sum'),AvgSalesQty=('SalesQuantity','mean'),AvgSalePrice=('SalesDollars','mean'))
     safety_df['AvgSalesQty']=safety_df['AvgSalesQty'].round(0).astype(int)
